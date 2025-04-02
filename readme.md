@@ -19,3 +19,22 @@ W problemie zakleszczenie występuje wtedy, gdy dwaj filozofowie czekają na sie
 #### Głodzenie
 Głodzenie to sytuacja, w której dany proces nie jest w stanie zakończyć działania ze względu na brak dostępu do jakiegoś zasobu (procesora, pliku etc.)./
 W problemie głodzenie występuje wtedy, gdy filozof przez długi czas nie uzyskuje dostępu do dwóch pałeczek i nie może jeść.
+## Wątki w programie
+W programie każdy filozof jest wątkiem (`std::thread`), który niezależnie od siebie wykonuje w nieskończonej pętli funkcję `dine (int id)`. W ramach tej funkcji każdy jest przełączany cyklicznie pomiędzy stanami myślenia (`think (int id)`) i jedzenia (`eat (int id)`).
+## Sekcje krytyczne i ich rozwiązanie
+Każdy widelec jest reprezentowany jako osobny mutex (`std::mutex`).\
+Strategia unikania zakleszczania:
+- Parzyści filozofowie najpierw podnoszą widelec **lewy**, a potem **prawy**.
+- Analogicznie, nieparzyści filozofowie najpierw podnoszą widelec **prawy**, a potem **lewy**.
+Minimalizujemy w ten sposób ryzyko wystąpienia deadlocka, ponieważ filozofowie nie próbują blokować tych samych zasobów w tej samej kolejności.
+```cpp
+if (id % 2 == 0) { // Even philosophers pick left first
+            forks[left].lock();
+            cout << "Philosopher " << id << " picked up left fork.\n";
+            forks[right].lock();
+        } else { // Odd philosophers pick right first
+            forks[right].lock();
+            cout << "Philosopher " << id << " picked up right fork.\n";
+            forks[left].lock();
+        }
+```
