@@ -1,6 +1,7 @@
 ## Instrukcja uruchomienia programu
 Żeby zbudować program wystarczy użyć komendy make.\
-Uruchomienie programu: ./main <number_of_philosophers>
+Uruchomienie programu: ./main <number_of_philosophers>\
+Program można zakończyć kombinacją klawiszy ctrl + C.
 ## Problem jedzących filozofów
 ### Opis problemu
 - N filozofów siedzi przy okrągłym stole
@@ -38,3 +39,24 @@ if (id % 2 == 0) { // Even philosophers pick left first
             forks[left].lock();
         }
 ```
+## Wydruk w konsoli
+Przy uruchomieniu programu na ekranie pojawia się następująca tabela:
+```
+------------------------------------------------------
+Philosopher State       Thinking  Eating    Waiting
+------------------------------------------------------
+0           WAITING     5         4         5
+1           THINKING    6         5         5
+2           EATING      5         5         5
+3           THINKING    3         2         2
+4           EATING      3         3         3
+------------------------------------------------------
+```
+Wyjaśnienie znaczenia kolumn:
+- Philosopher: ID filozofa
+- State: Stan filozofa o danym ID (EATING/THINKING/WAITING)
+- Thinking/Eating/Waiting: Ilość razy, gdy filozof był w danym stanie.
+## Źródła
+1. https://medium.com/@ruinadd/philosophers-42-guide-the-dining-philosophers-problem-893a24bc0fe2
+2. https://home.agh.edu.pl/~balis/dydakt/tw/lab8/tw-5fil.pdf
+3. https://hackmd.io/@wglugla/rJgyeyPGU
