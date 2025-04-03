@@ -1,6 +1,6 @@
 ## Instrukcja uruchomienia programu
 Żeby zbudować program wystarczy użyć komendy make.\
-Uruchomienie programu: ./main <number_of_philosophers>\
+Uruchomienie programu: `./main <number_of_philosophers>`\
 Program można zakończyć kombinacją klawiszy ctrl + C.
 ## Problem jedzących filozofów
 ### Opis problemu
